@@ -285,8 +285,37 @@ var Funcao = {
            
         }
     },
-    analisaSolucaoOtima: function (vetorPtsOtimos){
-      //vetorPtsInter = w = {x:X,y:Y} 
+    analisaSolucaoOtima: function (vetorPtsOtimos,xObj,yObj,tipo){
+      //vetorPtsInter[ w ] -> w = {x:X,y:Y} 
+      var resul = new Array();
+      var maior,menor;
+      
+      var id = 0;
+
+        for (var i=0;i<vetorPtsOtimos;i++){
+          resul.push(vetorPtsInter[i][0]['x']*xObj+vetorPtsInter[i][0]['y']*yObj);
+        } 
+        if(tipo = "Minimizar"){
+            for (var j=1;j<resul.length;j++){
+                menor = resul[0];
+                if(resul[j]<menor){
+                    menor = resul[j];
+                    id = j;
+                }
+            }
+        }
+        else if(tipo == "Maximizar"){
+            for (var j=1;j<resul.length;j++){
+                
+                maior = resul[0];
+                if(resul[j]>maior){
+                    maior = resul[j];
+                    id = j;
+                }
+            }
+        }
+          
+        alert('Ponto Ótimo: '+"("+vetorPtsInter[id][0]['x']+","+vetorPtsInter[id][0]['y']+")");
     }
 
 };
@@ -322,6 +351,20 @@ $(document).ready(function () {
     $(".btavancar").click(function () {
         x1 = $("#Zx1").val(); // x1 da função Z
         x2 = $("#Zx2").val(); // x2 da função Z
+        
+        var aChk = document.getElementsByName("funcz"); 
+
+        for (var i = 0; i < aChk.length; i++) {
+
+            if (aChk[i].checked == true) {
+              tipoOtm = aChk[i].value;  
+            }
+
+
+        }
+
+//        alert('chegado: '+);
+        
         Funcao.setFuncaoObj(x1 + "+" + x2);
         Funcao.setMaximizar();
         Funcao.setMinimizar();
@@ -366,6 +409,9 @@ $(document).ready(function () {
             $(this).each(function () {
                 aux_x = $(this).find('.restx1').val();
                 aux_y = $(this).find('.restx2').val();
+               
+               
+                
                 if (aux_x == '') {
                     aux_x = 0;
 
@@ -481,7 +527,7 @@ $(document).ready(function () {
         Funcao.AnalisaPontos(a, b, d, c, e, vetorPtsInter,1);
         
         //alert("QuantPontosViaveis: "+vetorPtsViaveis.length);
-        Funcao.analisaSolucaoOtima(vetorPtsViaveis);
+        Funcao.analisaSolucaoOtima(vetorPtsViaveis,x1,x2,tipoOtm);
         //Vx1,Vx2,Vcond,Vresul,Vretas,VPtsInter
 
 

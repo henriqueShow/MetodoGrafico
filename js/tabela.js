@@ -2,6 +2,7 @@ var quantidade = 0;
 vetorPtsInter = new Array();
 vetorPtsViaveis = new Array();
 vetorTrue = new Array();
+var pontoOtimo={x:null,y:null};
 
 var Funcao = {
     setFuncaoObj: function (funcao) {
@@ -38,22 +39,22 @@ var Funcao = {
         Funcao.ApagarArray(vetorretas);
         cont = 0;
 
-        alert("Limpou todos os Vetores!");
+        //alert("Limpou todos os Vetores!");
     },
     mostraRest: function (arrayAux1, arrayAux2, arrayAux3, arrayAux4) {
 
-        for (i = 0; i < arrayAux1.length; i++) {
-            alert("r" + i + ": " + arrayAux1[i] + "x +" + arrayAux2[i] + "y " + arrayAux3[i] + " " + arrayAux4[i]);
-        }
+//        for (i = 0; i < arrayAux1.length; i++) {
+//            alert("r" + i + ": " + arrayAux1[i] + "x +" + arrayAux2[i] + "y " + arrayAux3[i] + " " + arrayAux4[i]);
+//        }
     },
     //retas=[p1, p2]
     //p1 = [x,y]
     //p2 = [x,y]
     mostraPtsRest: function (retas) {
-
-        for (i = 0; i < retas.length; i++) {
-            alert("r" + i + ": " + "P1: (" + retas[i][0]['x'] + "," + retas[i][0]['y'] + ")" + " P2: (" + retas[i][1]['x'] + "," + retas[i][1]['y'] + ")");
-        }
+//
+//        for (i = 0; i < retas.length; i++) {
+//            alert("r" + i + ": " + "P1: (" + retas[i][0]['x'] + "," + retas[i][0]['y'] + ")" + " P2: (" + retas[i][1]['x'] + "," + retas[i][1]['y'] + ")");
+//        }
     },
     achaIntersercao: function (coefX, coefY, resul) {
 
@@ -235,7 +236,7 @@ var Funcao = {
                     
                     if (Vcond[k] == '>=') {
                         
-                        //alert(Vx[k] * X + Vy[k] * Y +Vcond[k]+Vresul[k]);
+//                        alert(Vx[k] * X + Vy[k] * Y +Vcond[k]+Vresul[k]);
                         if (((Vx[k] * X + Vy[k] * Y) > Vresul[k])|| ((Vx[k] * X + Vy[k] * Y) == Vresul[k])) {
                             
                             vetorTrue.push(eTrue);
@@ -246,7 +247,7 @@ var Funcao = {
                     }
                     else if (Vcond[k] == '<='){
                         
-                        //alert(Vx[k] * X + Vy[k] * Y + Vcond[k]+Vresul[k]);
+//                        alert(Vx[k] * X + Vy[k] * Y + Vcond[k]+Vresul[k]);
                         if (((Vx[k] * X + Vy[k] * Y) < Vresul[k])||((Vx[k] * X + Vy[k] * Y) == Vresul[k])) {
                            
                             vetorTrue.push(eTrue);
@@ -256,7 +257,7 @@ var Funcao = {
                     }
                     else if (Vcond[k] == '=') {
                         
-                        //alert(Vx[k] * X + Vy[k] * Y +Vcond[k]+Vresul[k]);
+//                        alert(Vx[k] * X + Vy[k] * Y +Vcond[k]+Vresul[k]);
                         if ((Vx[k] * X + Vy[k] * Y) == Vresul[k]){
                             
                             vetorTrue.push(eTrue);
@@ -268,13 +269,13 @@ var Funcao = {
                 
                 
                 w = {x:X,y:Y};
-                auxPontos.push(w);
+                //auxPontos.push(w);
                 
                 
                 
                  if(vetorTrue.length == Vcond.length){
-                     
-                    vetorPtsViaveis.push(auxPontos);
+//                     alert('AQUII X: '+w.x+' AQUII y: '+w.y);
+                    vetorPtsViaveis.push(w);
                     
                     auxPontos.pop();
                 }
@@ -284,30 +285,42 @@ var Funcao = {
             }
            
         }
-    },
+    },                             //pontos viaveis;
     analisaSolucaoOtima: function (vetorPtsOtimos,xObj,yObj,tipo){
+        
       //vetorPtsInter[ w ] -> w = {x:X,y:Y} 
       var resul = new Array();
       var maior,menor;
+      //alert("ENTREIIIIIIIIIIIIIII");
       
+      //(tipo);
       var id = 0;
 
-        for (var i=0;i<vetorPtsOtimos;i++){
-          resul.push(vetorPtsInter[i][0]['x']*xObj+vetorPtsInter[i][0]['y']*yObj);
+        for (var i=0;i<vetorPtsOtimos.length;i++){
+            var ki;
+            ki = ((vetorPtsOtimos[i]['x']*xObj)+(vetorPtsOtimos[i]['y']*yObj));
+            //('Ponto'+(i+1)+': '+"("+vetorPtsOtimos[i]['x']+","+vetorPtsOtimos[i]['y']+")");
+            
+          resul.push(ki);
+          
         } 
-        if(tipo = "Minimizar"){
+        if(tipo === "Minimizar"){
+            //alert('Minimizar');
+            menor = resul[0];
             for (var j=1;j<resul.length;j++){
-                menor = resul[0];
+                
                 if(resul[j]<menor){
                     menor = resul[j];
                     id = j;
                 }
             }
         }
-        else if(tipo == "Maximizar"){
+        else if(tipo === "Maximizar"){
+            //alert('Maximizar');
+            maior = resul[0];
             for (var j=1;j<resul.length;j++){
                 
-                maior = resul[0];
+                
                 if(resul[j]>maior){
                     maior = resul[j];
                     id = j;
@@ -315,7 +328,56 @@ var Funcao = {
             }
         }
           
-        alert('Ponto Ótimo: '+"("+vetorPtsInter[id][0]['x']+","+vetorPtsInter[id][0]['y']+")");
+        //alert('Ponto Ótimo: '+"("+vetorPtsOtimos[id]['x']+","+vetorPtsOtimos[id]['y']+")");
+        pontoOtimo['x']=vetorPtsOtimos[id]['x'];
+        pontoOtimo['y']=vetorPtsOtimos[id]['y'];
+    },
+    analisarMaiorXeMaiorY: function (vetorretas, vetorPtsInter){
+        var maiorX;
+        var maiorY;
+        
+        maiorX = -999;
+        maiorY = -999;
+        
+        for(i=0;i<vetorretas.length;i++){
+            if(vetorretas[i][0]['x']>maiorX){
+                maiorX = vetorretas[i][0]['x'];
+            }
+            if(vetorretas[i][0]['y']>maiorY){
+                maiorY = vetorretas[i][0]['y'];
+            }
+            if(vetorretas[i][1]['x']>maiorX){
+                maiorX = vetorretas[i][1]['x'];
+            }
+            if(vetorretas[i][1]['y']>maiorY){
+                maiorY = vetorretas[i][1]['y'];
+            }
+            
+        }
+        for (j=0;j<vetorPtsInter.length;j++){
+            if(vetorPtsInter[j][0]['x'] > maiorX){
+               maiorX = vetorPtsInter[j][0]['x'];
+            }
+            
+            if(vetorPtsInter[j][0]['y'] > maiorY){
+               maiorY = vetorPtsInter[j][0]['y'];
+            }
+        }
+        melhor={x:maiorX ,y:maiorY};
+        return melhor;
+    },setarOutroPonto: function(vetorretas,resp){
+        
+        for(i=0;i<vetorretas.length;i++){
+            
+        if((vetorretas[i][0]['x']==vetorretas[i][1]['x'])&&(vetorretas[i][0]['y']==vetorretas[i][1]['y'])){
+                if(vetorretas[i][0]['x']==0){
+                    vetorretas[i][1]['x']=resp.x;
+                }
+                else if(vetorretas[i][0]['y']==0){
+                    vetorretas[i][1]['y']=resp.y;
+                }
+            }
+        }
     }
 
 };
@@ -357,7 +419,8 @@ $(document).ready(function () {
         for (var i = 0; i < aChk.length; i++) {
 
             if (aChk[i].checked == true) {
-              tipoOtm = aChk[i].value;  
+              tipoOtm = aChk[i].value; 
+                
             }
 
 
@@ -410,7 +473,7 @@ $(document).ready(function () {
                 aux_x = $(this).find('.restx1').val();
                 aux_y = $(this).find('.restx2').val();
                
-               
+//               graficoGera(1);
                 
                 if (aux_x == '') {
                     aux_x = 0;
@@ -460,16 +523,16 @@ $(document).ready(function () {
                 pontosB[i] = vetorresultado[i] / vetorx2[i];
 
 
-                p1 = {x: 1000, y: pontosB[i]};
-                p2 = {x: 1000, y: pontosB[i]};
+                p1 = {x: 0, y: pontosB[i]};
+                p2 = {x: 0, y: pontosB[i]};
                 //alert("Apenas x2 diferente de 0");
             }
 
             else if (vetorx1[i] != 0 && vetorx2[i] == 0) {
                 pontosA[i] = vetorresultado[i] / vetorx1[i];
 
-                p1 = {x: pontosA[i], y: 1000};
-                p2 = {x: pontosA[i], y: 1000};
+                p1 = {x: pontosA[i], y: 0};
+                p2 = {x: pontosA[i], y: 0};
                 //alert("Apenas x1 diferente de 0");
             }
             else if (vetorx1[i] == 0 && vetorx2[i] == 0) {
@@ -522,16 +585,30 @@ $(document).ready(function () {
         //alert("Tamanho e: "+e.length);
 
 
-        Funcao.achaIntersercao(a, b, c);
-        Funcao.AnalisaPontos(a, b, d, c, e, vetorPtsInter,0);
-        Funcao.AnalisaPontos(a, b, d, c, e, vetorPtsInter,1);
+        Funcao.achaIntersercao(vetorx1, vetorx2, vetorresultado);
+        Funcao.AnalisaPontos(vetorx1, vetorx2, vetorcondicao, vetorresultado, vetorretas, vetorPtsInter,0); //anlisar pontos das restriçoes
+        Funcao.AnalisaPontos(vetorx1, vetorx2, vetorcondicao, vetorresultado, vetorretas, vetorPtsInter,1); //Pontos interserção
         
-        //alert("QuantPontosViaveis: "+vetorPtsViaveis.length);
+        
+        //("QuantPontosViaveis: "+vetorPtsViaveis.length);
+        
+//        for(y=0;y<vetorPtsViaveis.length;y++){
+//            alert('X: '+vetorPtsViaveis[y]['x']+' Y: '+vetorPtsViaveis[y]['y']);
+//        }
+        //alert("passou");
         Funcao.analisaSolucaoOtima(vetorPtsViaveis,x1,x2,tipoOtm);
+        resp = Funcao.analisarMaiorXeMaiorY(vetorretas,vetorPtsInter);
+        Funcao.setarOutroPonto(vetorretas,resp);
+        
+        //alert("Maior X: "+resp.x+" Maior Y: "+resp.y);
+        
         //Vx1,Vx2,Vcond,Vresul,Vretas,VPtsInter
+        graficoGera(vetorretas,vetorcondicao,vetorPtsInter,pontoOtimo,vetorPtsViaveis,vetorx1.length,"direto",((x1*pontoOtimo.x)+(x2*pontoOtimo.y)));
 
-
+        //graficoGera();
         // é necessário zerar os vetores
+        //alert("X: "+pontoOtimo.x+" Y: "+pontoOtimo.y);
+        //graficoGera(1);
         Funcao.limparDados();
 
         // antes de mandar para o gráfico, o valor de X deve ser ordenado do menor para menor.

@@ -14,7 +14,11 @@ input[type="text"]{
     width: 40px;
 }
 
-
+h2{
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
 
 
 input:focus, textarea:focus {
@@ -90,24 +94,25 @@ fieldset{
 #header h1 a { float: left; margin-top: 25px; width: 245px; height: 42px; background: url(../images/templatemo_logo.png); text-indent: -10000px; }
 
 #templatemo_main {
-    width: 800px;
-    height: 490px;
+    width: 1024px;
+    height: 600px;
     margin: 0 auto;
-    padding: 30px 10px;
-    background: url(../images/templatemo_main.png) no-repeat center center;
+    padding: 0px 10px;
+    background: url(../images/templatemo_main2.png) no-repeat center center;
 }
 
 #templatemo_content {
     float: left;
-    width: 600px;
+    width: 830px;
     height: 400px;
-    padding: 40px 20px;
+    padding: 0px 20px;
 }
 
 #templatemo_sidebar {
     float: right;	
     width: 130px;
     height: 490px;
+    padding-top: 60px;
 }
 
 #menu {
@@ -137,8 +142,8 @@ fieldset{
 }
 
 .scroll {
-    width: 630px;
-    height: 410px;
+    width: 860px;
+    height: 550px;
     overflow: auto;
     /* overflow-x: hidden; */
     position: relative;
@@ -147,7 +152,7 @@ fieldset{
 }
 
 .scrollContainer div.panel {
-    width: 630px;
+    width: 870px;
     height: 910px;
     overflow: visible;
 }
@@ -176,7 +181,7 @@ ul.navigation a {
     background: url(../images/templatemo_menu.png) no-repeat left center
 }
 
-ul.navigation a:hover, ul.navigation a.selected { background:url(../images/templatemo_menu_hover.png) no-repeat left center }
+ul.navigation a:hover, ul.navigation a.selected { background:url(../images/templatemo_menu_hover2.png) no-repeat left center }
 
 ul.navigation a:focus {
     outline: none;

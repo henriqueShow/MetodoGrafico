@@ -1,0 +1,107 @@
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "xy",
+  "theme": "chalk",
+  "path": "http://www.amcharts.com/lib/3/",
+  "dataProvider": [ {
+    "ax": 0,
+    "ay": 0,
+    "bx": 0,
+    "by": 5
+  }, {
+    "ax": 1,
+    "ay": 1,
+    "bx": 1,
+    "by": 5
+  }, {
+    "ax": 2,
+    "ay": 2,
+    "bx": 2,
+    "by": 5
+  }, {
+    "ax": 3,
+    "ay": 3,
+    "bx": 3,
+    "by": 5
+  }, {
+    "ax": 4,
+    "ay": 4,
+    "bx": 4,
+    "by": 5
+  }, {
+    "ax": 5,
+    "ay": 5,
+    "bx": 5,
+    "by": 5
+  }, {
+    "ax": 6,
+    "ay": 6,
+    "bx": 6,
+    "by": 5
+  }, {
+    "ax": 7,
+    "ay": 7,
+    "bx": 7,
+    "by": 5
+  }, {
+    "ax": 8,
+    "ay": 8,
+    "bx": 8,
+    "by": 5
+  }, {
+    "ax": 9,
+    "ay": 9,
+    "bx": 9,
+    "by": 5
+  }, {
+    "ax": 10,
+    "ay": 10,
+    "bx": 10,
+    "by": 5
+  }, {
+    "ax": 11,
+    "ay": 11,
+    "bx": 11,
+    "by": 5
+  } ],
+  "valueAxes": [ {
+    "position": "bottom",
+    "axisAlpha": 0,
+    "dashLength": 1,
+    "id": "x",
+    "title": "X Axis"
+  }, {
+    "axisAlpha": 0,
+    "dashLength": 1,
+    "position": "left",
+    "id": "y",
+    "title": "Y Axis"
+  } ],
+  "startDuration": 1,
+  "graphs": [ {
+    "balloonText": "x:[[x]] y:[[y]]",
+    "fillAlphas": 0.3,
+    "fillToAxis": "x",
+    "lineAlpha": 1,
+    "xField": "ax",
+    "yField": "ay",
+    "lineColor": "#FF6600",
+     "bullet" : "circle"
+  }, {
+    "balloonText": "x:[[x]] y:[[y]]",
+    "lineAlpha": 1,
+    "fillToAxis": "y",
+    "fillAlphas": 0.3,
+    "xField": "bx",
+    "yField": "by",
+    "lineColor": "#FCD202",
+     "bullet" : "circle"
+  } ],
+  "marginLeft": 64,
+  "marginBottom": 60,
+  "chartScrollbar": {},
+  "chartCursor": {},
+  "export": {
+    "enabled": true,
+    "position": "bottom-right"
+  }
+} );
